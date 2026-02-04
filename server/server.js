@@ -14,20 +14,9 @@ connectDB();
 
 const app = express();
 
-// CORS - allow frontend origin from env
-const allowedOrigins = process.env.FRONTEND_URL
-  ? process.env.FRONTEND_URL.split(",")
-  : ["http://localhost:5173"];
-
+// CORS - allow all origins
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin) || origin.includes("localhost")) {
-      callback(null, true);
-    } else {
-      callback(new Error("CORS not allowed by server"), false);
-    }
-  },
+  origin: true,
   credentials: true
 }));
 
