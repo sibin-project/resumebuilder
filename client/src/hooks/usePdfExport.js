@@ -20,14 +20,22 @@ export const usePdfExport = () => {
             await new Promise(resolve => setTimeout(resolve, 1000));
 
             const canvas = await html2canvas(element, {
-                scale: 3, // Higher scale for ultra-sharp quality
+                scale: 2.5, // Balanced for quality and performance
                 backgroundColor: "#ffffff",
                 useCORS: true,
                 logging: false,
-                letterRendering: true,
-                scrollX: 0,
-                scrollY: -window.scrollY,
-                windowWidth: 794, // Standard A4 width at 96 DPI
+                allowTaint: true,
+                width: 794, // Exact A4 width in px at 96 DPI
+                windowWidth: 1200, // Larger window width to avoid mobile-style responsive folding
+                onclone: (clonedDoc) => {
+                    const clonedElement = clonedDoc.getElementById('resume-preview-id');
+                    if (clonedElement) {
+                        clonedElement.style.transform = 'none';
+                        clonedElement.style.width = '794px';
+                        clonedElement.style.margin = '0';
+                        clonedElement.style.padding = '0';
+                    }
+                }
             });
 
             // Using PNG for perfect text clarity (JPEG can make text look 'low' or blurry)

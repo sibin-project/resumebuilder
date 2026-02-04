@@ -148,8 +148,8 @@ export default function Finish() {
     return (
         <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
             {/* Hidden print container */}
-            <div className="absolute left-[-9999px] top-0 pointer-events-none">
-                <div ref={printRef} style={{ width: '210mm', backgroundColor: 'white' }}>
+            <div className="fixed top-0 left-0 -z-50 opacity-0 pointer-events-none overflow-hidden" style={{ width: '794px' }}>
+                <div ref={printRef} style={{ width: '794px', backgroundColor: 'white' }}>
                     <LivePreview printMode={true} scale={1} />
                 </div>
             </div>
